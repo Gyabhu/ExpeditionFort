@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="eng">
 
 <head>
     {% load static %}
@@ -8,7 +8,7 @@
     <meta name="keywords" content="Ashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ashion | Template</title>
+    <title>Expedition Fort</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
@@ -65,7 +65,7 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="{% url 'home' %}">Home</a></li>
-                            <li><a href="{% url 'category' %}">Men’s</a>
+                            <li><a href="{% url 'category-men' %}">Men’s</a>
                                 <ul class="dropdown">
                                     <li><a href="./product-details.html">Jackets & Vests</a></li>
                                     <li><a href="./shop-cart.html">Tops</a></li>
@@ -74,7 +74,7 @@
                                     <li><a href="./blog-details.html">Accessories</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{% url 'category' %}">Women’s</a>
+                            <li><a href="{% url 'category-women' %}">Women’s</a>
                             <ul class="dropdown">
                                     <li><a href="./product-details.html">Jackets & Vests</a></li>
                                     <li><a href="./shop-cart.html">Tops</a></li>
@@ -83,7 +83,7 @@
                                     <li><a href="./blog-details.html">Accessories</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{% url 'category' %}">Bags & Gears</a>
+                            <li><a href="{% url 'bags-gears' %}">Bags & Gears</a>
                                 <ul class="dropdown">
                                     <li><a href="./product-details.html">Backpacks</a></li>
                                     <li><a href="./shop-cart.html">Sleeping Bags</a></li>

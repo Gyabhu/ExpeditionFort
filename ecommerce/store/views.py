@@ -11,11 +11,25 @@ def category(request):
     products = Product.objects.all()
     context = {"products":products}
     return render(request,'store/category.html', context)
+def category_male(request):
+    products = Product.objects.all()
+    context = {"products":products}
+    return render (request, 'store/category-male.html', context)
+def category_female(request):
+    products = Product.objects.all()
+    context = {"products":products}
+    return render (request, 'store/category-female.html', context)
 
+def category_gears(request):
+    products = Product.objects.all()
+    context = {"products":products}
+    return render (request, 'store/category-gears.html', context)
 def product(request):
     context = {}
     return render(request,'store/product.html', context)
-
+def productdetail(request):
+    context = {}
+    return render(request,'store/product-details.html', context)
 def cart(request):
     context = {}
     return render(request,'store/cart.html', context)
