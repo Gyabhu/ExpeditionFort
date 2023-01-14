@@ -3,13 +3,13 @@
 {% block content %}
 
 <!-- Breadcrumb Begin -->
-    <div class="breadcrumb-option">
+<div class="breadcrumb-option" xmlns="http://www.w3.org/1999/html">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                        <span>Login</span>
+                        <span>Signup</span>
                     </div>
                 </div>
             </div>
@@ -22,22 +22,25 @@
             <div class="row" style="text-align:center;">
                 <div class="col-lg-12 col-md-12">
                     <div class="contact__form">
-                            <h5>Log in</h5>
-
-                            <form method="POST" action="">
+                            <h5>Sign Up</h5>
+                            <form  method="POST" action = "">
                                 {% csrf_token %}
                                 {% for message in messages %}
-                                <center><h6><font color = 'red'>{{message}}</font></h6></center>
+                                <center><h6><font color = 'red'>{{message}}</font></h6> </center>
                                 {% endfor %}
+                                <input type="email" placeholder="Email" name = "email" style="width:300px;">
+                                <br>
                                 <input type="username" placeholder="Username" name = "username" style="width:300px;">
                                 <br>
                                 <input type="password" placeholder="Password" name = "password" style="width:300px;">
                                 <br>
-                                 <a href="{% url 'signup' %}" >
-                                      <h6 style="color:red;">Sign up</h6>
-                                 </a>
+                                <input type="password" placeholder="Confirm Password" name = "cpassword" style="width:300px;">
+                                <br>
+                                <a href="{% url 'signin' %}" >
+                                 <h6 style="color:red;">Login</h6>
+                                </a>
                                  <br>
-                                <button type="submit" class="site-btn">Login</button>
+                                <button type="submit" class="site-btn">Create Account</button>
                             </form>
                         </div>
                     </div>
