@@ -57,11 +57,13 @@ def signin(request):
         if user is not None:
             login(request,user)
             name = user.username
+            messages.success(request,"Login Sucessful!")
             return render(request,'store/index.html',{"name": name})
+
 
         else:
             messages.error(request,"Username or Password Does not match")
-            return redirect('/login')
+            return redirect('/signin')
 
 
     return render(request,'store/login.html')
@@ -86,12 +88,13 @@ def signup(request):
                     password=password
                 )
                 user.save()
-                return redirect('/signup')
+                messages.success(request, "Account Created sucessfully!")
+                return redirect('/signin')
         else:
             messages.error(request, 'Password does not match')
     context = {}
     return render(request,'store/signup.html', context)
 def signout(request):
     logout(request)
-    messages.success(request,"Logged out")
+    messages.success(request,"Logged out Sucessfully!")
     return redirect('home')

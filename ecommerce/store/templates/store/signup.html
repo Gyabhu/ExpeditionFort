@@ -25,9 +25,7 @@
                             <h5>Sign Up</h5>
                             <form  method="POST" action = "">
                                 {% csrf_token %}
-                                {% for message in messages %}
-                                <center><h6><font color = 'red'>{{message}}</font></h6> </center>
-                                {% endfor %}
+
                                 <input type="email" placeholder="Email" name = "email" style="width:300px;">
                                 <br>
                                 <input type="username" placeholder="Username" name = "username" style="width:300px;">

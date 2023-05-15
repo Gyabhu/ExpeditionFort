@@ -204,8 +204,8 @@
                                     <div class="label new">SALE</div>
                                     <ul class="product__hover">
                                         <li><a href="{% if product.image %}{{product.image.url}}{% endif %}" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                        <li><a><span data-product="{{product.id}}" data-action="add" class="icon_heart_alt update-wishlist"></a></span></li>
+                                        <li><a><span data-product="{{product.id}}" data-action="add" class="icon_bag_alt update-cart"></a></span></li>
 
                                     </ul>
                                 </div>

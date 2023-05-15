@@ -24,14 +24,12 @@
                     <div class="contact__form">
                             <h5>Log in</h5>
 
-                            <form method="POST" action="">
+                            <form id = "form" method="POST" action="">
                                 {% csrf_token %}
-                                {% for message in messages %}
-                                <center><h6><font color = 'red'>{{message}}</font></h6></center>
-                                {% endfor %}
-                                <input type="username" placeholder="Username" name = "username" style="width:300px;">
+
+                                <input type="username" placeholder="Username" name = "username" id = "username" style="width:300px;">
                                 <br>
-                                <input type="password" placeholder="Password" name = "password" style="width:300px;">
+                                <input type="password" placeholder="Password" name = "password" id = "password" style="width:300px;">
                                 <br>
                                  <a href="{% url 'signup' %}" >
                                       <h6 style="color:red;">Sign up</h6>
