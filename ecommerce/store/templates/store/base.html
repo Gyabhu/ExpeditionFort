@@ -70,7 +70,7 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="{% url 'home' %}">Home</a></li>
-                            <li><a href="{% url 'category-men' %}">Men’s</a>
+                            <li><a href="{% url 'category' %}">Men’s</a>
                                 <ul class="dropdown">
                                     <li><a href="./product-details.html">Jackets & Vests</a></li>
                                     <li><a href="./shop-cart.html">Tops</a></li>
@@ -79,7 +79,7 @@
                                     <li><a href="./blog-details.html">Accessories</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{% url 'category-women' %}">Women’s</a>
+                            <li><a href="{% url 'category' %}">Women’s</a>
                             <ul class="dropdown">
                                     <li><a href="./product-details.html">Jackets & Vests</a></li>
                                     <li><a href="./shop-cart.html">Tops</a></li>
@@ -88,7 +88,7 @@
                                     <li><a href="./blog-details.html">Accessories</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{% url 'bags-gears' %}">Bags & Gears</a>
+                            <li><a href="{% url 'category' %}">Bags & Gears</a>
                                 <ul class="dropdown">
                                     <li><a href="./product-details.html">Backpacks</a></li>
                                     <li><a href="./shop-cart.html">Sleeping Bags</a></li>
@@ -132,7 +132,7 @@
         </div>
     </header>
     {% include 'store/messages.html' %}
-    <!-- Header Section End -->
+ <!-- Header Section End -->
     {% block content %}
     {% endblock content %}
 
@@ -231,8 +231,8 @@
 <script src="{% static 'js/owl.carousel.min.js' %}"></script>
 <script src="{% static 'js/jquery.nicescroll.min.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
-    <script src="{% static 'js/validation.js' %}"></script>
-    <script src="{% static 'js/cart.js' %}"></script>
+<script src="{% static 'js/validation.js' %}"></script>
+<script src="{% static 'js/cart.js' %}"></script>
 <script>
 setTimeout(function(){
     if ($('#msg').length > 0){
