@@ -5,7 +5,12 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 
-
+# Context Pre-processor
+def categories(request):
+    return {
+        "categories": Category.objects.all(),
+        "subcategories": SubCategory.objects.all(),
+    }
 
 def store(request):
     products = Product.objects.all()
@@ -15,14 +20,14 @@ def store(request):
 
     return render(request, 'store/index.html', context)
 
-def category(request):
+def category(request, slug):
     # name = request.url
     categories = Category.objects.all()
-    # category = Category.objects.filter(name=category)
+    category = Category.objects.filter(slug=slug)
     subcategories = SubCategory.objects.all()
     products = Product.objects.all()
-    context = {"products": products, "subcategories": subcategories}
-    return render(request,'store/category.html', context)
+    context = {"products": products, "subcategories": subcategories, "category": category}
+    return render(request, 'store/category.html', context)
 
 def product(request):
     context = {}
@@ -53,14 +58,14 @@ def signin(request):
         user = authenticate(username=username, password=password)
 
         if user is not None:
-            login(request,user)
+            login(request, user)
             name = user.username
-            messages.success(request,"Login Sucessful!")
-            return render(request,'store/index.html',{"name": name})
+            messages.success(request, "Login Sucessful!")
+            return render(request, 'store/index.html', {"name": name})
 
 
         else:
-            messages.error(request,"Username or Password Does not match")
+            messages.error(request, "Username or Password Does not match")
             return redirect('/signin')
 
 

@@ -73,33 +73,18 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="{% url 'home' %}">Home</a></li>
-                            <li><a href="{% url 'category' %}">Men’s</a>
+                            {% for c in categories %}
+                            <li><a href="{% url 'category' c.slug %}">{{c.name}}</a>
                                 <ul class="dropdown">
-                                    <li><a href="./product-details.html">Jackets & Vests</a></li>
-                                    <li><a href="./shop-cart.html">Tops</a></li>
-                                    <li><a href="./checkout.html">Bottoms</a></li>
-                                    <li><a href="./blog-details.html">Footwears</a></li>
-                                    <li><a href="./blog-details.html">Accessories</a></li>
+                                    {% for subcat in subcategories %}
+                                    {% if subcat.category_id == c.id %}
+                                    <li><a href="./product-details.html">{{ subcat.name }}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
                                 </ul>
                             </li>
-                            <li><a href="{% url 'category' %}">Women’s</a>
-                            <ul class="dropdown">
-                                    <li><a href="./product-details.html">Jackets & Vests</a></li>
-                                    <li><a href="./shop-cart.html">Tops</a></li>
-                                    <li><a href="./checkout.html">Bottoms</a></li>
-                                    <li><a href="./blog-details.html">Footwears</a></li>
-                                    <li><a href="./blog-details.html">Accessories</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="{% url 'category' %}">Bags & Gears</a>
-                                <ul class="dropdown">
-                                    <li><a href="./product-details.html">Backpacks</a></li>
-                                    <li><a href="./shop-cart.html">Sleeping Bags</a></li>
-                                    <li><a href="./checkout.html">Tents</a></li>
-                                    <li><a href="./blog-details.html">Duffel Bags</a></li>
+                            {% endfor %}
 
-                                </ul>
-                            </li>
                             <li><a href="{% url 'contact' %}">Contact</a></li>
                         </ul>
                     </nav>

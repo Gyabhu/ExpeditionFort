@@ -25,7 +25,9 @@
                     <div class="shop__sidebar">
                         <div class="sidebar__categories">
                             <div class="section-title">
-                                <h4>Sub Categories</h4>
+                                {% for c in categories %}
+                                <h4>{{c.name}}</h4>
+                                {% endfor %}
                             </div>
                             <div class="categories__accordion">
                                 <div class="accordion" id="accordionExample">

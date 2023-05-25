@@ -45,6 +45,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank= True )
     subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True, blank= True )
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True)
+    slug = models.SlugField(max_length=255, blank=True)
     stock = models.CharField( choices=STOCK, blank=True, max_length=30)
     labels = models.CharField(choices=LABELS, blank=True, max_length=30)
     def __str__(self):
