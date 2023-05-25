@@ -5,15 +5,15 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=300)
-    slug = models.CharField(max_length=400,unique = True)
-    logo = models.CharField(blank=True,max_length=50)
+    slug = models.CharField(max_length=400, unique=True)
+    logo = models.CharField(blank=True, max_length=50)
 
     def __str__(self):
         return self.name
 class SubCategory(models.Model):
     name = models.CharField(max_length=300)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    slug = models.CharField(max_length=400, unique= True)
+    slug = models.CharField(max_length=400, unique=True)
     def __str__(self):
         return self.name
 
@@ -35,8 +35,8 @@ class Brand(models.Model):
     def __str__(self):
         return self.name
 
-STOCK = (('In stock','In stock'), ('Out of stock', 'Out of Stock'))
-LABELS = (('new','new'),('sale','sale'),('','default'))
+STOCK = (('In stock', 'In stock'), ('Out of stock', 'Out of Stock'))
+LABELS = (('new', 'new'), ('sale', 'sale'), ('bestseller', 'bestseller'), ('', 'default'))
 class Product(models.Model):
     name = models.CharField(max_length=200, null=True)
     price = models.FloatField()
@@ -44,14 +44,23 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank= True )
     subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True, blank= True )
-    brand = models.ForeignKey(Brand, on_delete=models.CASCADE,null = True)
-    stock = models.CharField( choices= STOCK,blank = True, max_length=30)
-    labels = models.CharField(choices= LABELS, blank = True, max_length=30)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True)
+    stock = models.CharField( choices=STOCK, blank=True, max_length=30)
+    labels = models.CharField(choices=LABELS, blank=True, max_length=30)
     def __str__(self):
         return self.name
 
+
+class Discount(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+    discount_name = models.CharField(max_length=100, blank=True, null=True)
+    discount_percentage = models.FloatField()
+
+    def __str__(self):
+        return self.discount_name
+
 class Customer(models.Model):
-    user = models.OneToOneField(User , on_delete= models.CASCADE, null=True, blank= True)
+    user = models.OneToOneField(User, on_delete= models.CASCADE, null=True, blank= True)
     name = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
 

@@ -10,12 +10,18 @@ from django.http import HttpResponse
 def store(request):
     products = Product.objects.all()
     carousels = Carousel.objects.all()
-    context = {"products": products, "carousels": carousels}
+    brands = Brand.objects.all()
+    context = {"products": products, "carousels": carousels, "brands": brands}
+
     return render(request, 'store/index.html', context)
 
 def category(request):
+    # name = request.url
+    categories = Category.objects.all()
+    # category = Category.objects.filter(name=category)
+    subcategories = SubCategory.objects.all()
     products = Product.objects.all()
-    context = {"products":products}
+    context = {"products": products, "subcategories": subcategories}
     return render(request,'store/category.html', context)
 
 def product(request):

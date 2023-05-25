@@ -1186,6 +1186,9 @@ ol {
 .product__item__pic .label.sale {
 	background: #ca1515;
 }
+.product__item__pic .label.bestseller {
+	background: #d3af37;
+}
 
 .product__hover {
 	position: absolute;
