@@ -15,7 +15,7 @@ class SubCategory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     slug = models.CharField(max_length=400, unique=True)
     def __str__(self):
-        return self.name
+        return self.slug
 
 class Carousel(models.Model):
     name = models.CharField(max_length=300)
@@ -42,10 +42,12 @@ class Product(models.Model):
     price = models.FloatField()
     image = models.ImageField(null=True, blank=True, upload_to='image/')
     description = models.TextField(blank=True)
+    reviews = models.TextField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank= True )
     subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True, blank= True )
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True)
     slug = models.SlugField(max_length=255, blank=True)
+    unisex = models.BooleanField(default=False)
     stock = models.CharField( choices=STOCK, blank=True, max_length=30)
     labels = models.CharField(choices=LABELS, blank=True, max_length=30)
     def __str__(self):

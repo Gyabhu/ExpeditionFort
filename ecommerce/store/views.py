@@ -23,9 +23,12 @@ def store(request):
 def category(request, slug):
     # name = request.url
     categories = Category.objects.all()
-    category = Category.objects.filter(slug=slug)
+    category = Category.objects.get(slug=slug)
     subcategories = SubCategory.objects.all()
-    products = Product.objects.all()
+    products = Product.objects.filter(category=category)
+    # if products[0].unisex == True:
+
+
     context = {"products": products, "subcategories": subcategories, "category": category}
     return render(request, 'store/category.html', context)
 
