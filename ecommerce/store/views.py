@@ -3,7 +3,10 @@ from .models import *
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Max, Min
+
 from django.http import HttpResponse
+
 
 # Context Pre-processor
 def categories(request):
@@ -11,6 +14,7 @@ def categories(request):
         "categories": Category.objects.all(),
         "subcategories": SubCategory.objects.all(),
     }
+
 
 def store(request):
     products = Product.objects.all()
@@ -20,41 +24,46 @@ def store(request):
 
     return render(request, 'store/index.html', context)
 
+
 def category(request, slug):
-    # name = request.url
-    categories = Category.objects.all()
     category = Category.objects.get(slug=slug)
     subcategories = SubCategory.objects.all()
     products = Product.objects.filter(category=category)
-    # if products[0].unisex == True:
+    # For Price filter - getting max and min price for filtered category
+    min_max_price = products.aggregate(Min('price'), Max('price'))
 
-
-    context = {"products": products, "subcategories": subcategories, "category": category}
+    context = {"products": products, "subcategories": subcategories, "category": category, 'pricefilter': min_max_price}
     return render(request, 'store/category.html', context)
 
-def product(request):
-    context = {}
-    return render(request,'store/product.html', context)
+
+
+
+
+
 def product_detail(request, id):
     product = Product.objects.get(id=id)
     products = Product.objects.all()
-    print("This is error = " , product.labels)
+    print("This is error = ", product.labels)
     context = {"product": product, "products": products}
     return render(request, 'store/product-details.html', context)
+
+
 def cart(request):
     context = {}
-    return render(request,'store/cart.html', context)
+    return render(request, 'store/cart.html', context)
+
 
 def checkout(request):
     context = {}
-    return render(request,'store/checkout.html', context)
+    return render(request, 'store/checkout.html', context)
+
 
 def contact(request):
     context = {}
-    return render(request,'store/contact.html', context)
+    return render(request, 'store/contact.html', context)
+
 
 def signin(request):
-
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
@@ -71,10 +80,10 @@ def signin(request):
             messages.error(request, "Username or Password Does not match")
             return redirect('/signin')
 
+    return render(request, 'store/login.html')
 
-    return render(request,'store/login.html')
+
 def signup(request):
-
     if request.method == "POST":
         email = request.POST['email']
         username = request.POST['username']
@@ -99,8 +108,10 @@ def signup(request):
         else:
             messages.error(request, 'Password does not match')
     context = {}
-    return render(request,'store/signup.html', context)
+    return render(request, 'store/signup.html', context)
+
+
 def signout(request):
     logout(request)
-    messages.success(request,"Logged out Sucessfully!")
+    messages.success(request, "Logged out Sucessfully!")
     return redirect('home')

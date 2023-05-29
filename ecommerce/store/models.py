@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 
 class Category(models.Model):
@@ -10,21 +11,26 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
 class SubCategory(models.Model):
     name = models.CharField(max_length=300)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     slug = models.CharField(max_length=400, unique=True)
+
     def __str__(self):
         return self.slug
 
+
 class Carousel(models.Model):
     name = models.CharField(max_length=300)
-    image = models.ImageField(upload_to = 'media', null= "True")
+    image = models.ImageField(upload_to='media', null="True")
     description = models.TextField(blank=True)
     rank = models.IntegerField()
 
     def __str__(self):
         return self.name
+
 
 class Brand(models.Model):
     name = models.CharField(max_length=30)
@@ -35,21 +41,36 @@ class Brand(models.Model):
     def __str__(self):
         return self.name
 
+
+class Color(models.Model):
+    name = models.CharField(max_length=100)
+    color_code = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 STOCK = (('In stock', 'In stock'), ('Out of stock', 'Out of Stock'))
 LABELS = (('new', 'new'), ('sale', 'sale'), ('bestseller', 'bestseller'), ('', 'default'))
+SIZE = (('S', 'S'), ('M', 'M'), ('L', 'L'), ('XL', 'XL'))
+
+
 class Product(models.Model):
     name = models.CharField(max_length=200, null=True)
     price = models.FloatField()
     image = models.ImageField(null=True, blank=True, upload_to='image/')
     description = models.TextField(blank=True)
     reviews = models.TextField(blank=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank= True )
-    subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True, blank= True )
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True, blank=True)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True)
     slug = models.SlugField(max_length=255, blank=True)
     unisex = models.BooleanField(default=False)
-    stock = models.CharField( choices=STOCK, blank=True, max_length=30)
+    stock = models.CharField(choices=STOCK, blank=True, max_length=30)
     labels = models.CharField(choices=LABELS, blank=True, max_length=30)
+    size = models.CharField(choices=SIZE, null=True, max_length=30)
+    color = models.ForeignKey(Color, on_delete=models.CASCADE, null=True)
+
     def __str__(self):
         return self.name
 
@@ -62,8 +83,9 @@ class Discount(models.Model):
     def __str__(self):
         return self.discount_name
 
+
 class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete= models.CASCADE, null=True, blank= True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
 
@@ -77,15 +99,16 @@ class Order(models.Model):
     complete = models.BooleanField(default=False, null=True, blank=False)
     transaction_id = models.CharField(max_length=200, null=True)
 
-
     def __str__(self):
         return str(self.id)
 
+
 class OrderItem(models.Model):
-    product = models.ForeignKey(Product,on_delete=models.SET_NULL, blank=True, null=True)
-    order = models.ForeignKey(Order,on_delete=models.SET_NULL, blank=True, null=True)
-    quantity = models.IntegerField(default=0, null=True, blank = True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
+    quantity = models.IntegerField(default=0, null=True, blank=True)
     date_added = models.DateField(auto_now_add=True)
+
 
 class Shipping(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
